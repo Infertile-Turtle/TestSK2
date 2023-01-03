@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct TestSK2App: App {
+    @StateObject
+    private var purchaseManager = PurchaseManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(purchaseManager)
         }
     }
 }

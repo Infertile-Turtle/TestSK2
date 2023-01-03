@@ -5,13 +5,13 @@
 //  Created by Andrew Fairchild on 1/3/23.
 //
 
-
+import Foundation
 import SwiftUI
 import StoreKit
 
 struct ContentView: View {
     @EnvironmentObject
-    private var purchaseManager: PurchaseManager
+    private var purchaseManager:PurchaseManager
 
     var body: some View {
         VStack(spacing: 20) {
