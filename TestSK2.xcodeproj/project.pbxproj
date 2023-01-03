@@ -20,6 +20,7 @@
 		FFBC8A762964A34E0088C09A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFBC8A782964A34E0088C09A /* TestSK2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestSK2.entitlements; sourceTree = "<group>"; };
 		FFBC8A7A2964A34E0088C09A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FFBC8A812964A3D70088C09A /* MainConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = MainConfiguration.storekit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +37,7 @@
 		FFBC8A662964A34D0088C09A = {
 			isa = PBXGroup;
 			children = (
+				FFBC8A812964A3D70088C09A /* MainConfiguration.storekit */,
 				FFBC8A712964A34D0088C09A /* TestSK2 */,
 				FFBC8A702964A34D0088C09A /* Products */,
 			);
