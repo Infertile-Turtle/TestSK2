@@ -5,21 +5,26 @@
 //  Created by Andrew Fairchild on 1/3/23.
 //
 
+
 import SwiftUI
 import StoreKit
 
 struct ContentView: View {
-    let productIds = ["pro_monthly", "pro_yearly", "pro_lifetime"]
-
-    @State
-    private var products: [Product] = []
+    @EnvironmentObject
+    private var purchaseManager: PurchaseManager
 
     var body: some View {
         VStack(spacing: 20) {
             Text("Products")
-            ForEach(self.products) { product in
+            ForEach(purchaseManager.products) { product in
                 Button {
-                    // Don't do anything yet
+                    _ = Task<Void, Never> {
+                        do {
+                            try await purchaseManager.purchase(product)
+                        } catch {
+                            print(error)
+                        }
+                    }
                 } label: {
                     Text("\(product.displayPrice) - \(product.displayName)")
                         .foregroundColor(.white)
@@ -29,15 +34,13 @@ struct ContentView: View {
                 }
             }
         }.task {
-            do {
-                try await self.loadProducts()
-            } catch {
-                print(error)
+            _ = Task<Void, Never> {
+                do {
+                    try await purchaseManager.loadProducts()
+                } catch {
+                    print(error)
+                }
             }
         }
-    }
-
-    private func loadProducts() async throws {
-        self.products = try await Product.products(for: productIds)
     }
 }
