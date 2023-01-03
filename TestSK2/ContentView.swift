@@ -5,32 +5,35 @@
 //  Created by Andrew Fairchild on 1/3/23.
 //
 
-import Foundation
 import SwiftUI
 import StoreKit
 
 struct ContentView: View {
     @EnvironmentObject
-    private var purchaseManager:PurchaseManager
-
+    private var purchaseManager: PurchaseManager
+    
     var body: some View {
         VStack(spacing: 20) {
-            Text("Products")
-            ForEach(purchaseManager.products) { product in
-                Button {
-                    _ = Task<Void, Never> {
-                        do {
-                            try await purchaseManager.purchase(product)
-                        } catch {
-                            print(error)
+            if purchaseManager.hasUnlockedPro {
+                Text("Thank you for purchasing pro!")
+            } else {
+                Text("Products")
+                ForEach(purchaseManager.products) { product in
+                    Button {
+                        _ = Task<Void, Never> {
+                            do {
+                                try await purchaseManager.purchase(product)
+                            } catch {
+                                print(error)
+                            }
                         }
+                    } label: {
+                        Text("\(product.displayPrice) - \(product.displayName)")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(.blue)
+                            .clipShape(Capsule())
                     }
-                } label: {
-                    Text("\(product.displayPrice) - \(product.displayName)")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(.blue)
-                        .clipShape(Capsule())
                 }
             }
         }.task {
