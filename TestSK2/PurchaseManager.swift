@@ -9,7 +9,7 @@ import Foundation
 import StoreKit
 
 @MainActor
-class PurchaseManager: ObservableObject {
+class PurchaseManager: NSObject, ObservableObject {
 
     private let productIds = ["pro_monthly", "pro_yearly", "pro_lifetime"]
 
@@ -18,19 +18,19 @@ class PurchaseManager: ObservableObject {
     @Published
     private(set) var purchasedProductIDs = Set<String>()
 
+    private let entitlementManager: EntitlementManager
     private var productsLoaded = false
     private var updates: Task<Void, Never>? = nil
 
-    init() {
+    init(entitlementManager: EntitlementManager) {
+        self.entitlementManager = entitlementManager
+        super.init()
         self.updates = observeTransactionUpdates()
+        SKPaymentQueue.default().add(self)
     }
 
     deinit {
         self.updates?.cancel()
-    }
-
-    var hasUnlockedPro: Bool {
-       return !self.purchasedProductIDs.isEmpty
     }
 
     func loadProducts() async throws {
@@ -75,15 +75,27 @@ class PurchaseManager: ObservableObject {
                 self.purchasedProductIDs.remove(transaction.productID)
             }
         }
+
+        self.entitlementManager.hasPro = !self.purchasedProductIDs.isEmpty
     }
 
     private func observeTransactionUpdates() -> Task<Void, Never> {
-        Task(priority: .background) {
+        Task(priority: .background) { [unowned self] in
             for await verificationResult in Transaction.updates {
                 // Using verificationResult directly would be better
                 // but this way works for this tutorial
                 await self.updatePurchasedProducts()
             }
         }
+    }
+}
+
+extension PurchaseManager: SKPaymentTransactionObserver {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+
+    }
+
+    func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
+        return true
     }
 }

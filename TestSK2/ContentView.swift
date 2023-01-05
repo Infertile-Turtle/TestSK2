@@ -10,11 +10,14 @@ import StoreKit
 
 struct ContentView: View {
     @EnvironmentObject
+    private var entitlementManager: EntitlementManager
+
+    @EnvironmentObject
     private var purchaseManager: PurchaseManager
-    
+
     var body: some View {
         VStack(spacing: 20) {
-            if purchaseManager.hasUnlockedPro {
+            if entitlementManager.hasPro {
                 Text("Thank you for purchasing pro!")
             } else {
                 Text("Products")
@@ -34,6 +37,18 @@ struct ContentView: View {
                             .background(.blue)
                             .clipShape(Capsule())
                     }
+                }
+
+                Button {
+                    _ = Task<Void, Never> {
+                        do {
+                            try await AppStore.sync()
+                        } catch {
+                            print(error)
+                        }
+                    }
+                } label: {
+                    Text("Restore Purchases")
                 }
             }
         }.task {

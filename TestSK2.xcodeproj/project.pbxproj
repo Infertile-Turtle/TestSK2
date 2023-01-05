@@ -12,6 +12,7 @@
 		FFBC8A772964A34E0088C09A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFBC8A762964A34E0088C09A /* Assets.xcassets */; };
 		FFBC8A7B2964A34E0088C09A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFBC8A7A2964A34E0088C09A /* Preview Assets.xcassets */; };
 		FFBC8A832964B31C0088C09A /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBC8A822964B31C0088C09A /* PurchaseManager.swift */; };
+		FFBC8A852964D5790088C09A /* EntitlementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBC8A842964D5790088C09A /* EntitlementManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		FFBC8A7A2964A34E0088C09A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FFBC8A812964A3D70088C09A /* MainConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = MainConfiguration.storekit; sourceTree = "<group>"; };
 		FFBC8A822964B31C0088C09A /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		FFBC8A842964D5790088C09A /* EntitlementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitlementManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				FFBC8A722964A34D0088C09A /* TestSK2App.swift */,
 				FFBC8A742964A34D0088C09A /* ContentView.swift */,
+				FFBC8A842964D5790088C09A /* EntitlementManager.swift */,
 				FFBC8A822964B31C0088C09A /* PurchaseManager.swift */,
 				FFBC8A762964A34E0088C09A /* Assets.xcassets */,
 				FFBC8A782964A34E0088C09A /* TestSK2.entitlements */,
@@ -147,6 +150,7 @@
 				FFBC8A752964A34D0088C09A /* ContentView.swift in Sources */,
 				FFBC8A832964B31C0088C09A /* PurchaseManager.swift in Sources */,
 				FFBC8A732964A34D0088C09A /* TestSK2App.swift in Sources */,
+				FFBC8A852964D5790088C09A /* EntitlementManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
